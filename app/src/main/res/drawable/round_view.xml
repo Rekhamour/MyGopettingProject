@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <stroke android:color="@color/toolbar_new" android:width="1dip" />
+
+    <corners
+        android:bottomLeftRadius="39dp"
+        android:bottomRightRadius="39dp"
+        android:topLeftRadius="39dp"
+        android:topRightRadius="39dp" />
+
+    <size
+
+        android:height="90dp"
+        android:width="90dp" />
+    <solid
+        android:color="@color/white"
+        />
+
+</shape>

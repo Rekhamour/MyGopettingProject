@@ -1,0 +1,92 @@
+package com.gopetting.rekha;
+
+import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.RecyclerView;
+import android.text.Html;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+
+import com.squareup.picasso.Picasso;
+
+import java.util.Collections;
+import java.util.List;
+
+
+
+public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> {
+
+    public final String TAG = getClass().getName();
+    private final LayoutInflater inflater;
+    public List<ObjectsBean> beanlist = Collections.emptyList();
+
+    Context context;
+
+    public HomeAdapter(Context context, List<ObjectsBean> beanlist) {
+        this.beanlist = beanlist;
+        this.context = context;
+        Log.d(TAG, "i mi n adapter ");
+        inflater = LayoutInflater.from(context);
+    }
+
+    @Override
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.single_item_row, parent, false);
+        MyViewHolder viewHolder = new MyViewHolder(itemView);
+        return viewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
+        final ObjectsBean bean = beanlist.get(position);
+        holder.setIsRecyclable(false);
+
+        holder.setIsRecyclable(false);
+
+        holder.PersonName.setText(bean.getName());
+        holder.date.setText(bean.getEndDate());
+        Log.e(TAG, "USER IMAGE: " + bean.getIcon());
+        if (bean.getIcon().contains(".png") || bean.getIcon().contains(".jpg")) {
+            Picasso.with(context).load(bean.getIcon()).into(holder.person_pic);
+            Picasso.with(context).load(bean.getIcon()).into(holder.full_guide_img);
+        }
+        holder.btn_add.setVisibility(View.VISIBLE);
+
+
+
+}
+
+
+
+    @Override
+    public int getItemCount() {
+        Log.e(TAG, "info size " + beanlist.size());
+        return beanlist.size();
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView PersonName, date, ac_title;
+        public ImageView person_pic, full_guide_img;
+        LinearLayout row;
+        Button btn_remove,btn_add;
+
+        public MyViewHolder(View view) {
+            super(view);
+            row = (LinearLayout) view.findViewById(R.id.row_layout);
+            PersonName = (TextView) view.findViewById(R.id.PersonName);
+            date = (TextView) view.findViewById(R.id.date);
+            person_pic = (ImageView) view.findViewById(R.id.person_pic);
+            full_guide_img = (ImageView) view.findViewById(R.id.full_guide_img);
+            btn_remove = (Button) view.findViewById(R.id.btn_remove);
+            btn_add = (Button) view.findViewById(R.id.btn_add);
+        }
+    }
+}

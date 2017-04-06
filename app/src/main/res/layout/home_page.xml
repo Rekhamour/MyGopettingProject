@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarAchievers"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:background="@color/toolbar_new"
+        android:layout_height="?attr/actionBarSize"
+        android:visibility="visible"
+        />
+    <RelativeLayout
+        android:background="@color/toolbar_new"
+        android:id="@+id/RL_for_cart"
+        android:onClick="openCartactivity"
+        android:layout_width="50dp"
+        android:layout_height="56dp">
+    <TextView
+        android:layout_width="20dp"
+        android:background="@drawable/round_view"
+        android:layout_marginTop="8dp"
+        android:id="@+id/cart_count"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_height="20dp" />
+        <ImageView
+            android:layout_marginTop="20dp"
+            android:layout_width="20dp"
+            android:background="@color/toolbar_new"
+            android:src="@drawable/shopping_cart"
+            android:layout_height="20dp" />
+    </RelativeLayout>
+</LinearLayout>
+
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/achiver_swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/achiverRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:fadeScrollbars="false"
+            android:isScrollContainer="true"
+            android:paddingTop="5dp"
+            android:scrollbars="vertical">
+        </android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>

@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MyGopettingProject</string>
+    <string name="oops">oops something went wrong,Please try again later</string>
+</resources>
