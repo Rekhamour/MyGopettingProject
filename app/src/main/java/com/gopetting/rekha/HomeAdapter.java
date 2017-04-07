@@ -19,6 +19,7 @@ import com.squareup.picasso.Picasso;
 import java.util.Collections;
 import java.util.List;
 
+import mehdi.sakout.fancybuttons.FancyButton;
 
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> {
@@ -76,7 +77,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
         public TextView PersonName, date, ac_title;
         public ImageView person_pic, full_guide_img;
         LinearLayout row;
-        Button btn_remove,btn_add;
+        FancyButton btn_remove,btn_add;
 
         public MyViewHolder(View view) {
             super(view);
@@ -85,8 +86,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
             date = (TextView) view.findViewById(R.id.date);
             person_pic = (ImageView) view.findViewById(R.id.person_pic);
             full_guide_img = (ImageView) view.findViewById(R.id.full_guide_img);
-            btn_remove = (Button) view.findViewById(R.id.btn_remove);
-            btn_add = (Button) view.findViewById(R.id.btn_add);
+            btn_remove = (FancyButton) view.findViewById(R.id.btn_remove);
+            btn_add = (FancyButton) view.findViewById(R.id.btn_add);
         }
     }
 }

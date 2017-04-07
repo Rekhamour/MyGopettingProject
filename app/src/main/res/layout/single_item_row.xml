@@ -11,6 +11,7 @@
     android:elevation="4dp"
     android:orientation="vertical"
     android:translationZ="8dp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,8 +38,7 @@
                     android:layout_height="55dp"
                     android:src="@drawable/avatar"
                     app:civ_border_color="@color/toolbar_new"
-                    app:civ_border_width="1dp"
-                    />
+                    app:civ_border_width="1dp" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -55,7 +55,7 @@
                         android:layout_marginLeft="5dp"
                         android:textColor="@color/toolbar_new"
                         android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/date"
@@ -64,7 +64,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="5dp"
                         android:maxLines="1"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -77,6 +77,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="8dp">
+
                 <FrameLayout
                     android:id="@+id/ImageFrame"
                     android:layout_width="match_parent"
@@ -88,40 +89,41 @@
                         android:layout_height="match_parent"
                         android:adjustViewBounds="true"
                         android:scaleType="centerCrop"
-                        android:visibility="gone"/>
+                        android:visibility="visible" />
 
                 </FrameLayout>
+
                 <mehdi.sakout.fancybuttons.FancyButton
                     android:id="@+id/btn_remove"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="end"
                     android:paddingBottom="10dp"
                     android:paddingLeft="20dp"
-                    android:visibility="gone"
-                    android:layout_gravity="end"
                     android:paddingRight="20dp"
                     android:paddingTop="10dp"
+                    android:visibility="gone"
                     fancy:fb_borderColor="#d7156c"
                     fancy:fb_borderWidth="1dp"
                     fancy:fb_radius="30dp"
-                    fancy:fb_text="Remove Items"
-                    fancy:fb_textColor="#c40954" />
-                <mehdi.sakout.fancybuttons.FancyButton
-                    android:id="@+id/btn_add"
-                    android:visibility="gone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
-                    android:paddingLeft="20dp"
-                    android:layout_gravity="end"
-                    android:paddingRight="20dp"
-                    android:paddingTop="10dp"
-                    fancy:fb_borderColor="#d7156c"
-                    fancy:fb_borderWidth="1dp"
-                    fancy:fb_radius="30dp"
-                    fancy:fb_text="Remove Items"
+                    fancy:fb_text="Remove Item"
                     fancy:fb_textColor="#c40954" />
 
+                <mehdi.sakout.fancybuttons.FancyButton
+                    android:id="@+id/btn_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="10dp"
+                    android:visibility="gone"
+                    fancy:fb_borderColor="#d7156c"
+                    fancy:fb_borderWidth="1dp"
+                    fancy:fb_radius="30dp"
+                    fancy:fb_text="Add Item"
+                    fancy:fb_textColor="#c40954" />
 
             </LinearLayout>
         </LinearLayout>

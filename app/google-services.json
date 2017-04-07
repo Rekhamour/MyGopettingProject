@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "764324903666",
+    "firebase_url": "https://mygopetting.firebaseio.com",
+    "project_id": "mygopetting",
+    "storage_bucket": "mygopetting.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:764324903666:android:0c5aaf6f6a948b5a",
+        "android_client_info": {
+          "package_name": "com.gopetting.rekha"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "764324903666-ulgmbigvv2hhtmkskfbkrrtcqudj7smk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gopetting.rekha",
+            "certificate_hash": "c287c5891766e5db9a2f061e0be4488a5ad67b77"
+          }
+        },
+        {
+          "client_id": "764324903666-cp1t66h1mueskmrgi40n2g0o69bi9urj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGh2g8ffmLGPoG8h_Gyx4GgFXJ0JRh2i8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "764324903666-cp1t66h1mueskmrgi40n2g0o69bi9urj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

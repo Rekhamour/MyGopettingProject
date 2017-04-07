@@ -31,6 +31,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
 public class HomePageActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     final List<ObjectsBean> info = new ArrayList<>();
     ArrayList<ObjectsBean> cartlist = new ArrayList<>();
@@ -47,7 +48,7 @@ public class HomePageActivity extends AppCompatActivity implements SwipeRefreshL
     private SwipeRefreshLayout achiver_swipe;
     public Context context;
     public TextView cart_count;
-    private int result_ok =1;
+    private int result_ok = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,7 @@ public class HomePageActivity extends AppCompatActivity implements SwipeRefreshL
         setContentView(R.layout.home_page);
         setToolbar();
         recyclerView = (RecyclerView) findViewById(R.id.achiverRecyclerView);
-        cart_count = (TextView)findViewById(R.id.cart_count);
+        cart_count = (TextView) findViewById(R.id.cart_count);
         sharedPreferences = getSharedPreferences("MyProfile", Context.MODE_PRIVATE);
         achiver_swipe = (SwipeRefreshLayout) findViewById(R.id.achiver_swipe_refresh_layout);
         linearLayoutManager = new LinearLayoutManager(HomePageActivity.this);
@@ -68,29 +69,29 @@ public class HomePageActivity extends AppCompatActivity implements SwipeRefreshL
         apiCall(mCount);
         recyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override public void onItemClick(View view, int position) {
+                    @Override
+                    public void onItemClick(View view, int position) {
                         // TODO Handle item click
-                        ObjectsBean object =info.get(position);
-                        Cartnumber = Cartnumber +1;
+                        ObjectsBean object = info.get(position);
+                        Cartnumber = Cartnumber + 1;
                         cartlist.add(object);
-                        cart_count.setText(Cartnumber);
-
-
-
+                        cart_count.setText(Integer.toString(Cartnumber));
                     }
                 })
         );
-        Log.e(TAG,"cartlist size" + cartlist.size() +  "cartnumber" + Cartnumber);
+        Log.e(TAG, "cartlist size" + cartlist.size() + "cartnumber" + Cartnumber);
+
+        // Login testing
+
+        startActivity(new Intent(this,LoginActivity.class));
     }
-    public void openCartactivity(View view)
-    {
-        Intent cartIntent = new Intent(HomePageActivity.this,CartActivity.class);
-        cartIntent.putExtra("cartcount",Cartnumber);
-        cartIntent.putExtra("cartbeanlist",cartlist);
+
+    public void openCartactivity(View view) {
+        Intent cartIntent = new Intent(HomePageActivity.this, CartActivity.class);
+        cartIntent.putExtra("cartcount", Cartnumber);
+        cartIntent.putExtra("cartbeanlist", cartlist);
         startActivity(cartIntent);
     }
-
-
 
 
     private void setToolbar() {
@@ -100,7 +101,7 @@ public class HomePageActivity extends AppCompatActivity implements SwipeRefreshL
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         toolbar.setSubtitleTextColor(getResources().getColor(R.color.white));
         setSupportActionBar(toolbar);
-       getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
     }
 
@@ -118,7 +119,7 @@ public class HomePageActivity extends AppCompatActivity implements SwipeRefreshL
         achiver_swipe.setRefreshing(true);
         Ion.with(HomePageActivity.this)
                 .load(Urls.getObjects)
-               // .setJsonObjectBody(params(count))
+                // .setJsonObjectBody(params(count))
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
@@ -126,60 +127,60 @@ public class HomePageActivity extends AppCompatActivity implements SwipeRefreshL
                         if (e == null) {
                             Log.d(TAG, "value of result " + result.toString());
                             final String totals = String.valueOf(result.get("total")).replaceAll("\"", "");
-                                achiver_swipe.setRefreshing(false);
-                                loading = true;
-                                JsonArray jsonArray = result.getAsJsonArray("data");
-                                String posts = jsonArray.toString();
-                                Log.d(TAG, "value of posts " + posts);
-                                try {
-                                    JSONArray postsArray = new JSONArray(posts);
-                                    for (int i = 0; i < jsonArray.size(); i++) {
-                                        JSONObject jsonObject = postsArray.getJSONObject(i);
-                                        String name = jsonObject.getString("name");
-                                        String endDate = jsonObject.getString("endDate");
-                                        String icon = jsonObject.getString("icon");
-                                        ObjectsBean Bean = new ObjectsBean();
-                                        Bean.setName(name);
-                                        Bean.setIcon(icon);
-                                        Bean.setEndDate(endDate);
-                                        info.add(Bean);
-                                        mCount++;
-                                    }
-                                    recyclerView.setAdapter(Adapter);
-                                    if (Integer.parseInt(totals) > mCount) {
-                                        Log.d(TAG, "total_posts is greater ");
-                                        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-                                            @Override
-                                            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                                                int pastVisiblesItems = mCount, visibleItemCount = mCount, totalItemCount = Integer.parseInt(totals);
-                                                if (dy > 0) //check for scroll down
-                                                {
-                                                    visibleItemCount = linearLayoutManager.getChildCount();
-                                                    totalItemCount = linearLayoutManager.getItemCount();
-                                                    pastVisiblesItems = linearLayoutManager.findFirstVisibleItemPosition();
-                                                    if (loading) {
-                                                        if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
-                                                            loading = false;
-                                                            Log.v(TAG, "Last Item Wow !");
-                                                            apiCall(mCount);
-                                                            Log.d(TAG, "value mCount" + mCount);
-                                                        }
+                            achiver_swipe.setRefreshing(false);
+                            loading = true;
+                            JsonArray jsonArray = result.getAsJsonArray("data");
+                            String posts = jsonArray.toString();
+                            Log.d(TAG, "value of posts " + posts);
+                            try {
+                                JSONArray postsArray = new JSONArray(posts);
+                                for (int i = 0; i < jsonArray.size(); i++) {
+                                    JSONObject jsonObject = postsArray.getJSONObject(i);
+                                    String name = jsonObject.getString("name");
+                                    String endDate = jsonObject.getString("endDate");
+                                    String icon = jsonObject.getString("icon");
+                                    ObjectsBean Bean = new ObjectsBean();
+                                    Bean.setName(name);
+                                    Bean.setIcon(icon);
+                                    Bean.setEndDate(endDate);
+                                    info.add(Bean);
+                                    mCount++;
+                                }
+                                recyclerView.setAdapter(Adapter);
+                                if (Integer.parseInt(totals) > mCount) {
+                                    Log.d(TAG, "total_posts is greater ");
+                                    recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                                        @Override
+                                        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                                            int pastVisiblesItems = mCount, visibleItemCount = mCount, totalItemCount = Integer.parseInt(totals);
+                                            if (dy > 0) //check for scroll down
+                                            {
+                                                visibleItemCount = linearLayoutManager.getChildCount();
+                                                totalItemCount = linearLayoutManager.getItemCount();
+                                                pastVisiblesItems = linearLayoutManager.findFirstVisibleItemPosition();
+                                                if (loading) {
+                                                    if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                                                        loading = false;
+                                                        Log.v(TAG, "Last Item Wow !");
+                                                        apiCall(mCount);
+                                                        Log.d(TAG, "value mCount" + mCount);
                                                     }
                                                 }
                                             }
-                                        });
-                                    } else {
-                                        Log.d(TAG, "not any last item");
-                                    }
-                                    Adapter.notifyDataSetChanged();
-                                    progressDialog.dismiss();
-                                    if (count != 0) {
-                                        recyclerView.scrollToPosition(count - 1);
-                                    }
-                                } catch (JSONException e1) {
-                                    progressDialog.dismiss();
-                                    e1.printStackTrace();
+                                        }
+                                    });
+                                } else {
+                                    Log.d(TAG, "not any last item");
                                 }
+                                Adapter.notifyDataSetChanged();
+                                progressDialog.dismiss();
+                                if (count != 0) {
+                                    recyclerView.scrollToPosition(count - 1);
+                                }
+                            } catch (JSONException e1) {
+                                progressDialog.dismiss();
+                                e1.printStackTrace();
+                            }
 
                         } else {
                             progressDialog.dismiss();
@@ -192,7 +193,7 @@ public class HomePageActivity extends AppCompatActivity implements SwipeRefreshL
 
     private JsonObject params(int count) {
         JsonObject object = new JsonObject();
-       // object.addProperty("clientid", sharedPreferences.getString(Constants.CLIENT_ID, ""));
+        // object.addProperty("clientid", sharedPreferences.getString(Constants.CLIENT_ID, ""));
         //object.addProperty("uid", sharedPreferences.getString(Constants.EMPLOYEE_ID, ""));
         object.addProperty("value", String.valueOf(count));
         Log.e(TAG, "object " + object);
