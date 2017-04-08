@@ -62,7 +62,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             Picasso.with(context).load(bean.getIcon()).into(holder.full_guide_img);
         }
         holder.btn_remove.setVisibility(View.VISIBLE);
-        holder.btn_remove.setOnClickListener(new View.OnClickListener() {
+      /*  holder.btn_remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 cartlist.remove(position);
@@ -71,8 +71,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                 holder.row.setVisibility(View.GONE);
                 Toast.makeText(context, "Your item removed from Cart ", Toast.LENGTH_SHORT).show();
                 cartcount--;
+
             }
-        });
+        });*/
     }
 
     @Override

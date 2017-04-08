@@ -12,7 +12,7 @@
             android:layout_width="match_parent"
             android:background="@color/toolbar_new"
             android:layout_height="?attr/actionBarSize"
-            android:visibility="visible"
+            android:visibility="gone"
             />
 
 

@@ -66,16 +66,19 @@ public class HomePageActivity extends AppCompatActivity implements SwipeRefreshL
         progressDialog = new ProgressDialog(HomePageActivity.this);
         progressDialog.setMessage("Please Wait...");
         progressDialog.show();
-        apiCall(mCount);
+        apiCall();
         recyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
                         // TODO Handle item click
                         ObjectsBean object = info.get(position);
-                        Cartnumber = Cartnumber + 1;
-                        cartlist.add(object);
-                        cart_count.setText(Integer.toString(Cartnumber));
+
+                        if (cartlist.indexOf(object) == -1) {
+                            Cartnumber = Cartnumber + 1;
+                            cartlist.add(object);
+                            cart_count.setText(Integer.toString(Cartnumber));
+                        }
                     }
                 })
         );
@@ -83,14 +86,16 @@ public class HomePageActivity extends AppCompatActivity implements SwipeRefreshL
 
         // Login testing
 
-        startActivity(new Intent(this,LoginActivity.class));
+        startActivity(new Intent(this, LoginActivity.class));
     }
 
     public void openCartactivity(View view) {
-        Intent cartIntent = new Intent(HomePageActivity.this, CartActivity.class);
-        cartIntent.putExtra("cartcount", Cartnumber);
-        cartIntent.putExtra("cartbeanlist", cartlist);
-        startActivity(cartIntent);
+        Bundle cartBundle =  new Bundle();
+        cartBundle.putInt("cartcount", Cartnumber);
+        cartBundle.putSerializable("cartbeanlist", cartlist);
+        CartFragment cartFragment =  new CartFragment();
+        cartFragment.setArguments(cartBundle);
+        getSupportFragmentManager().beginTransaction().replace(R.id.parentLL,cartFragment,"cartfragment").addToBackStack("cartfragment").commit();
     }
 
 
@@ -114,12 +119,11 @@ public class HomePageActivity extends AppCompatActivity implements SwipeRefreshL
         return true;
     }
 
-    private void apiCall(final int count) {
+    private void apiCall() {
         Log.d(TAG, "in api call func ");
         achiver_swipe.setRefreshing(true);
         Ion.with(HomePageActivity.this)
                 .load(Urls.getObjects)
-                // .setJsonObjectBody(params(count))
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
@@ -147,41 +151,13 @@ public class HomePageActivity extends AppCompatActivity implements SwipeRefreshL
                                     mCount++;
                                 }
                                 recyclerView.setAdapter(Adapter);
-                                if (Integer.parseInt(totals) > mCount) {
-                                    Log.d(TAG, "total_posts is greater ");
-                                    recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-                                        @Override
-                                        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                                            int pastVisiblesItems = mCount, visibleItemCount = mCount, totalItemCount = Integer.parseInt(totals);
-                                            if (dy > 0) //check for scroll down
-                                            {
-                                                visibleItemCount = linearLayoutManager.getChildCount();
-                                                totalItemCount = linearLayoutManager.getItemCount();
-                                                pastVisiblesItems = linearLayoutManager.findFirstVisibleItemPosition();
-                                                if (loading) {
-                                                    if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
-                                                        loading = false;
-                                                        Log.v(TAG, "Last Item Wow !");
-                                                        apiCall(mCount);
-                                                        Log.d(TAG, "value mCount" + mCount);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    });
-                                } else {
-                                    Log.d(TAG, "not any last item");
-                                }
                                 Adapter.notifyDataSetChanged();
                                 progressDialog.dismiss();
-                                if (count != 0) {
-                                    recyclerView.scrollToPosition(count - 1);
-                                }
+
                             } catch (JSONException e1) {
                                 progressDialog.dismiss();
                                 e1.printStackTrace();
                             }
-
                         } else {
                             progressDialog.dismiss();
                             e.printStackTrace();
@@ -191,21 +167,14 @@ public class HomePageActivity extends AppCompatActivity implements SwipeRefreshL
                 });
     }
 
-    private JsonObject params(int count) {
-        JsonObject object = new JsonObject();
-        // object.addProperty("clientid", sharedPreferences.getString(Constants.CLIENT_ID, ""));
-        //object.addProperty("uid", sharedPreferences.getString(Constants.EMPLOYEE_ID, ""));
-        object.addProperty("value", String.valueOf(count));
-        Log.e(TAG, "object " + object);
-        return object;
-    }
+
 
     @Override
     public void onRefresh() {
         Log.e(TAG, "at swipe to refresh");
         info.clear();
         Adapter.notifyDataSetChanged();
-        apiCall(0);
+        apiCall();
     }
 
 
@@ -244,6 +213,15 @@ public class HomePageActivity extends AppCompatActivity implements SwipeRefreshL
         @Override
         public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
 
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStack();
+        } else {
+            this.finish();
         }
     }
 }

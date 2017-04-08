@@ -24,7 +24,8 @@ public class CartActivity extends AppCompatActivity {
     public CartAdapter Adapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         cartcount = getIntent().getIntExtra("cartcount",0);

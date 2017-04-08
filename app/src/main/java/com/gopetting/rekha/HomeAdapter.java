@@ -50,8 +50,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
         final ObjectsBean bean = beanlist.get(position);
         holder.setIsRecyclable(false);
 
-        holder.setIsRecyclable(false);
-
         holder.PersonName.setText(bean.getName());
         holder.date.setText(bean.getEndDate());
         Log.e(TAG, "USER IMAGE: " + bean.getIcon());
@@ -60,13 +58,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
             Picasso.with(context).load(bean.getIcon()).into(holder.full_guide_img);
         }
         holder.btn_add.setVisibility(View.VISIBLE);
-
-
-
-}
-
-
-
+    }
     @Override
     public int getItemCount() {
         Log.e(TAG, "info size " + beanlist.size());
@@ -77,7 +69,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
         public TextView PersonName, date, ac_title;
         public ImageView person_pic, full_guide_img;
         LinearLayout row;
-        FancyButton btn_remove,btn_add;
+        FancyButton btn_remove, btn_add;
 
         public MyViewHolder(View view) {
             super(view);

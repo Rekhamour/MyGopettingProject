@@ -42,7 +42,10 @@
                 android:src="@drawable/shopping_cart" />
         </RelativeLayout>
     </LinearLayout>
-
+<FrameLayout
+    android:layout_width="match_parent"
+    android:id="@+id/parentLL"
+    android:layout_height="wrap_content">
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/achiver_swipe_refresh_layout"
@@ -60,4 +63,5 @@
             android:paddingTop="5dp"
             android:scrollbars="vertical"></android.support.v7.widget.RecyclerView>
     </android.support.v4.widget.SwipeRefreshLayout>
+</FrameLayout>
 </LinearLayout>
